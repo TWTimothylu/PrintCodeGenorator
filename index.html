@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pybricks Print Code 產生器</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Pybricks Print Code 產生器</h1>
+            <p>將圖片轉換為 Pybricks 可讀取的列印代碼</p>
+        </header>
+
+        <main>
+            <!-- 左側預覽區 -->
+            <section class="preview-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>原始圖片</h2>
+                    </div>
+                    <div class="canvas-container">
+                        <canvas id="originalCanvas"></canvas>
+                        <div id="uploadPlaceholder" class="placeholder">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                            <p>請載入圖片</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>二值化預覽</h2>
+                    </div>
+                    <div class="canvas-container">
+                        <canvas id="processedCanvas"></canvas>
+                        <div id="processedPlaceholder" class="placeholder">
+                            <p>預覽將顯示於此</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 右側控制區 -->
+            <section class="controls-section">
+                <div class="card control-panel">
+                    <div class="card-header">
+                        <h2>控制面板</h2>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="btn-primary file-input-label">
+                            載入圖片
+                            <input type="file" id="imageInput" accept="image/*" hidden>
+                        </label>
+                    </div>
+
+                    <div class="control-group">
+                        <h3>解析度</h3>
+                        <div class="input-row">
+                            <div class="input-wrapper">
+                                <label for="widthInput">寬</label>
+                                <input type="number" id="widthInput" value="100" min="1">
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="heightInput">高</label>
+                                <input type="number" id="heightInput" value="100" min="1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <h3>二值化閾值 <span id="thresholdValue" class="badge">128</span></h3>
+                        <input type="range" id="thresholdInput" min="0" max="255" value="128" class="slider">
+                    </div>
+
+                    <div class="control-group checkbox-group">
+                        <label class="checkbox-container">
+                            水平鏡像
+                            <input type="checkbox" id="mirrorInput">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <div class="control-group action-group">
+                        <button id="updateBtn" class="btn-secondary">更新預覽</button>
+                        <button id="downloadBtn" class="btn-success" disabled>儲存 Print Code (.py)</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
